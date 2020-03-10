@@ -18,10 +18,10 @@ class RoomAdmin(admin.ModelAdmin):
     fieldsets = (
         (
             "Basic Info",
-            {"fields": ("name", "description", "conutry", "address", "price")},
+            {"fields": ("name", "description", "country", "address", "price")},
         ),
         ("Times", {"fields": ("check_in", "check_out", "instant_book")},),
-        ("Spaces", {"fields": ("guests", "beds", "bedrooms", "paths")}),
+        ("Spaces", {"fields": ("guests", "beds", "bedrooms", "baths")}),
         (
             "More About the Space",
             {
@@ -45,6 +45,7 @@ class RoomAdmin(admin.ModelAdmin):
         "check_in",
         "check_out",
         "instant_book",
+        "count_amenities",
     )
 
     list_filter = (
@@ -68,6 +69,9 @@ class RoomAdmin(admin.ModelAdmin):
         "facility",
         "house_rule",
     )
+
+    def count_amenities(self, obj):
+        return obj.amenities.count()
 
 
 @admin.register(models.Photo)
