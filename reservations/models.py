@@ -36,7 +36,7 @@ class Resrvation(core_models.TimeStampedModel):
         now = timezone.now().date()
         return now > self.check_in and now < self.check_out
 
-    in_progress.models.boolean = True
+    # in_progress.models.boolean = True
 
     def is_finished(self):
         now = timezone.now().date()

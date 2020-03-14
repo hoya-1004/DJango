@@ -10,11 +10,11 @@ class ReservationAdmin(admin.ModelAdmin):
     list_display = (
         "room",
         "status",
-        "chek_in",
+        "check_in",
         "check_out",
         "guest",
         "in_progress",
         "is_finished",
     )
 
-    list_filter = ("status", "in_progress")
+    list_filter = ("status",)
