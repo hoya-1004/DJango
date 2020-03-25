@@ -8,9 +8,10 @@ from rooms import models as room_models
 
 NAME = "lists"
 
+
 class Command(BaseCommand):
 
-    help = f"This command creats {name}"
+    help = f"This command creats {NAME}"
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -26,14 +27,12 @@ class Command(BaseCommand):
         users = user_models.User.objects.all()
         rooms = room_models.Romom.objects.all()
         seeder.add_entity(
-            list_models.List,
-            number,
-            {
-                "user": lambda x: random.choice(users)
-            }
+            list_models.List, number, {"user": lambda x: random.choice(users)}
         )
         created = seeder.execute()
         cleaned = flatten(list(created.values()))
-        #for
-
+        for pk in cleaned:
+            list_model = list_models.List.objects.get(pk=pk)
+            to_add = rooms[random.randint(0, 5) : random.randint(6, 30)]
+            list_model.rooms.add(to_add)
         self.stdout.write(self.style.SUCCESS(f"{number}{NAME} created!"))
